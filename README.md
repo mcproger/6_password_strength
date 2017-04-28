@@ -1,6 +1,6 @@
 # Password Strength Calculator
 
-[TODO. There will be project description]
+
 
 # Project Goals
 
