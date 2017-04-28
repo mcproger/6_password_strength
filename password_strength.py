@@ -2,9 +2,9 @@ from getpass import getpass
 import os 
 
 
-def load_blacklist(filename = 'Blacklist.txt'):
-	if not os.path.exists('Blacklist.txt'):
-		return False
+def load_blacklist(filename='Blacklist.txt'):
+    if not os.path.exists('Blacklist.txt'):
+        return False
 	with open(filename, mode='r', encoding='utf-8') as password_blacklist:
 		passwords_blacklist = password_blacklist.read()
 		return passwords_blacklist
@@ -44,13 +44,13 @@ def check_digit(user_password):
 def get_password_strength(user_password):
     password_strength = 1
     summary_strength = [
-    {'check': check_digit(user_password), 'strength_point': 1 },
-    {'check': check_special_symbols(user_password), 'strength_point': 2 },
-    {'check': check_register(user_password), 'strength_point': 3 },
-    {'check': check_password_blacklist(user_password), 'strength_point': 4 },]
+    {'check': check_digit(user_password), 'strength_point': 1},
+    {'check': check_special_symbols(user_password), 'strength_point': 2},
+    {'check': check_register(user_password), 'strength_point': 3},
+    {'check': check_password_blacklist(user_password), 'strength_point': 4}]
     for points in summary_strength:
     	if points['check']:
-    		password_strength += points['strength_point']
+            password_strength += points['strength_point']
     return password_strength
 
 
@@ -62,4 +62,3 @@ if __name__ == '__main__':
         print('Strength of your password: %s' % get_password_strength(user_password))
     else:
         print("Your password is too short. Minimal length of password is 6 symbols")
-
