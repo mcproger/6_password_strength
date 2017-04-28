@@ -5,9 +5,9 @@ import os
 def load_blacklist(filename='Blacklist.txt'):
     if not os.path.exists('Blacklist.txt'):
         return False
-	with open(filename, mode='r', encoding='utf-8') as password_blacklist:
-		passwords_blacklist = password_blacklist.read()
-		return passwords_blacklist
+    with open(filename, mode='r', encoding='utf-8') as password_blacklist:
+        passwords_blacklist = password_blacklist.read()
+        return passwords_blacklist
 	
 
 def check_password_blacklist(user_password):
@@ -15,8 +15,8 @@ def check_password_blacklist(user_password):
         passwords_blacklist = load_blacklist().split()
         for password in passwords_blacklist:
             if user_password in password:
-	        return False
-	    return True
+	            return False
+        return True
 
 
 def check_register(user_password):
