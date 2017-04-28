@@ -11,14 +11,12 @@ def load_blacklist(filename='Blacklist.txt'):
 	
 
 def check_password_blacklist(user_password):
-	if load_blacklist():
-	    passwords_blacklist = load_blacklist().split()
-	    for password in passwords_blacklist:
-	    	if user_password in password:
-	    		return False
+    if load_blacklist():
+        passwords_blacklist = load_blacklist().split()
+        for password in passwords_blacklist:
+            if user_password in password:
+	        return False
 	    return True
-	else:
-	    return False
 
 
 def check_register(user_password):
