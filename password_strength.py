@@ -57,3 +57,4 @@ if __name__ == '__main__':
         print('Strength of your password: %s' % get_password_strength(user_password))
     else:
         print("Your password is too short. Minimal length of password is 6 symbols")
+
