@@ -1,24 +1,22 @@
 from getpass import getpass
-import os 
+import os, json, string
 
 
-def load_blacklist(filename = 'Blacklist.txt'):
-	if not os.path.exists('Blacklist.txt'):
-		return False
-	with open(filename, mode='r', encoding='utf-8') as password_blacklist:
-		passwords_blacklist = password_blacklist.read()
-		return passwords_blacklist
+def load_blacklist(filepath):
+    if not os.path.exists(filepath):
+        return False
+    with open(filepath, mode='r', encoding='utf-8') as password_blacklist:
+        passwords_blacklist = password_blacklist.read()
+        return passwords_blacklist
 	
 
 def check_password_blacklist(user_password):
-	if load_blacklist():
-	    passwords_blacklist = load_blacklist().split()
-	    for password in passwords_blacklist:
-	    	if user_password in password:
-	    		return False
-	    return True
-	else:
-		return False
+    if load_blacklist(filepath):
+        passwords_blacklist = load_blacklist(filepath).split()
+        for password in passwords_blacklist:
+            if user_password == password:
+                return False
+        return True
 
 
 def check_register(user_password):
@@ -28,38 +26,34 @@ def check_register(user_password):
     
 
 def check_special_symbols(user_password):
-    special_symbols = '!@#$%^&*()_='
     for symbol in user_password:
-        if symbol in special_symbols:
+        if symbol in string.punctuation:
             return True
     
 
 def check_digit(user_password):
-    digits = '0123456789'
     for symbol in user_password:
-        if symbol in digits:
+        if symbol in string.digits:
             return True
     
 
 def get_password_strength(user_password):
     password_strength = 1
     summary_strength = [
-    {'check': check_digit(user_password), 'strength_point': 1 },
-    {'check': check_special_symbols(user_password), 'strength_point': 2 },
-    {'check': check_register(user_password), 'strength_point': 3 },
-    {'check': check_password_blacklist(user_password), 'strength_point': 4 },]
+    {'check': check_digit(user_password), 'strength_point': 1},
+    {'check': check_special_symbols(user_password), 'strength_point': 2},
+    {'check': check_register(user_password), 'strength_point': 2},
+    {'check': check_password_blacklist(user_password), 'strength_point': 4}]
     for points in summary_strength:
     	if points['check']:
-    		password_strength += points['strength_point']
+            password_strength += points['strength_point']
     return password_strength
 
 
 if __name__ == '__main__':
-    if not os.path.exists('Blacklist.txt'):
-    	print('No Blacklist.txt file in current directory')
+    filepath = input('Please, enter path to password\'s Blacklist file: ')
     user_password = getpass('Please, enter you password: ')
     if len(user_password) >= 6:
         print('Strength of your password: %s' % get_password_strength(user_password))
     else:
         print("Your password is too short. Minimal length of password is 6 symbols")
-
