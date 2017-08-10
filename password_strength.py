@@ -42,7 +42,7 @@ def make_summary_strength_check(user_password, filepath):
     {'check': check_special_symbols(user_password), 'strength_point': 2},
     {'check': check_register(user_password), 'strength_point': 2},
     {'check': check_digit(user_password), 'strength_point': 1}]
-	return summary_strength_check
+    return summary_strength_check
 
 
 def get_password_strength(user_password, filepath):
