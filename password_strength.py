@@ -38,8 +38,8 @@ def check_digit(user_password):
 
 def make_summary_strength_check(user_password, filepath):
     summary_strength_check = [
-	{'check': check_password_blacklist(user_password, filepath), 'strength_point': 4},
-	{'check': check_special_symbols(user_password), 'strength_point': 2},
+    {'check': check_password_blacklist(user_password, filepath), 'strength_point': 4},
+    {'check': check_special_symbols(user_password), 'strength_point': 2},
     {'check': check_register(user_password), 'strength_point': 2},
     {'check': check_digit(user_password), 'strength_point': 1}]
 	return summary_strength_check
